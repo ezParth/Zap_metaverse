@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import userRouter from "./router/user.router"
+import adminRouter from "./router/admin.router"
 import { connectDB } from "./database/ConnectDB"
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(cors(corsOptions))
 
 //router
 app.use("/api/v1/user", userRouter); 
+app.use("/api/v1/admin", adminRouter); 
 
 // database
 connectDB()
