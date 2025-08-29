@@ -57,16 +57,17 @@ export const login = async (req: any, res: any) => {
 
 export const signup = async (req: any, res: any) => {
   try {
-    const { username, email, password } = req.body;
+    console.log("hitting")
+    const { username, password } = req.body;
 
-    if (!username || !password || !email) {
+    if (!username || !password) {
       return res.status(400).json({
         message: "Please provide all details",
         success: false,
       });
     }
 
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    const existingUser = await User.findOne({ $or: [{ username }] });
     if (existingUser) {
       return res.status(409).json({
         message: "User already exists",
@@ -79,7 +80,6 @@ export const signup = async (req: any, res: any) => {
     const newUser = await User.create({
       username,
       password: hash,
-      email,
     });
 
     const token = jwt.sign(
