@@ -7,7 +7,6 @@ const Arena = () => {
   const [users, setUsers] = useState(new Map());
   const [params, setParams] = useState({ token: '', spaceId: '' });
 
-  // Initialize WebSocket connection and handle URL params
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token') || '';
@@ -15,7 +14,7 @@ const Arena = () => {
     setParams({ token, spaceId });
 
     // Initialize WebSocket
-    wsRef.current = new WebSocket('ws://localhost:3001'); // Replace with your WS_URL
+    wsRef.current = new WebSocket('ws://localhost:3001');
     
     wsRef.current.onopen = () => {
       // Join the space once connected
